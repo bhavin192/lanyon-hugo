@@ -1,0 +1,41 @@
+{{ if .IsPage }}
+<meta name="description" content="{{ .Params.description }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
+<meta property="og:locale" content="{{ .Site.LanguageCode }}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ .Title }} &middot; {{ .Site.Params.Title }}" />
+<meta property="og:description" content="{{ .Params.description }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="{{ .Site.Params.Title }}" />
+<meta property="article:publisher" content="http://facebook.com/geeksocket" />
+<meta property="article:author" content="https://www.facebook.com/bhavin192" />
+{{- if .Params.tags }}
+{{ range .Params.tags -}}
+<meta property="article:tag" content="{{ . }}" />
+{{ end -}}
+{{ end -}}
+{{- if .Params.categories -}}
+<meta property="article:section" content="{{ index .Params.categories 0 }}" />
+{{ end -}}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}" />
+<meta property="og:updated_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}" />
+{{- if .Params.featured_image }}
+<meta property="og:image" content="{{ .Params.featured_image | absURL }}" />
+<meta property="og:image:secure_url" content="{{ .Params.featured_image | absURL }}" />
+{{- $imagePath := (printf "content%s" .Params.featured_image) }}
+{{- with (imageConfig $imagePath) }}
+<meta property="og:image:width" content="{{ .Width }}" />
+<meta property="og:image:height" content="{{ .Height }}" />
+{{ end -}}
+{{ end -}}
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="{{ .Params.description }}" />
+<meta name="twitter:title" content="{{ .Title }} &middot; {{ .Site.Params.Title }}" />
+<meta name="twitter:site" content="@GeekSocket" />
+{{- if .Params.featured_image }}
+<meta name="twitter:image" content="{{ .Params.featured_image | absURL }}" />
+{{ end -}}
+<meta name="twitter:creator" content="@_bhavin192" />
+<script type='application/ld+json'>{"@context":"https:\/\/schema.org","@type":"Person","url":"https:\/\/geeksocket.in\/blog\/","sameAs":["http:\/\/facebook.com\/geeksocket","https:\/\/www.youtube.com\/channel\/UC3tVTfj3jic0Voc0kT2D0qw","https:\/\/twitter.com\/GeekSocket"],"@id":"#person","name":"Bhavin Gandhi"}</script>
+{{ end }}
