@@ -1,14 +1,18 @@
 {{ partial "default_head.html" . }}
 
 <div class="post">
+  {{- if .Params.categories }}
+    <span class="post-date post-categories post-taxonomy">
+      {{- range (.GetTerms "categories") }}
+	<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      {{- end }}
+    </span>
+  {{ end -}}
   <h1 class="post-title">{{ .Title }}</h1>
   <span class="post-date">
     {{ .Site.Params.DateForm | default "Jan 2, 2006" | .Date.Format }}
-    {{- if .Params.categories }}
-    in
-      {{- range .Params.categories }}
-      <a href="/categories/{{ . | lower | urlize }}">{{ . }}</a>
-      {{- end }}
+    {{- if .Params.author }}
+    by <a href="#" >{{ .Params.author }}</a>
     {{ end -}}
   </span>
 
@@ -17,9 +21,9 @@
 
   {{- if .Params.tags }}
   <span class="post-info">Tags: </span>
-  <p class="post-info post-tags">
-    {{- range .Params.tags }}
-    <a href="/tags/{{ . | lower | urlize }}">{{ . }}</a>
+  <p class="post-info post-tags post-taxonomy">
+    {{- range (.GetTerms "tags") }}
+      <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
     {{- end }}
   </p>
   {{ end -}}

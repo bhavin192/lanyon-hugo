@@ -344,8 +344,16 @@ a.sidebar-nav-item:focus {
 }
 
 /* Remove last comma from last tag */
-.post-info a:not(:last-child):after {
+.post-taxonomy a:not(:last-child):after {
   content: ","
+}
+
+.post-categories {
+  margin-bottom: 0rem;
+}
+
+.post-categories a {
+  color: #9a9a9a;
 }
 
 /* author name */
